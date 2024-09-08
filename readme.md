@@ -9,5 +9,7 @@ Metodos para la clase Cadetería: AgregarCadete (incorpora un empleado nuevo), E
 
 Metodos para la clase Cadete: AceptarPedido, RechazarPedido. 
 
+
+
 ## 3. Teniendo en cuenta los principios de abstracción y ocultamiento, que atributos, propiedades y métodos deberían ser públicos y cuáles privados. 
 
