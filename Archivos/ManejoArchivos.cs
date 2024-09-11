@@ -7,7 +7,7 @@ public class ManejoArchivos
         List<Cadete> listaCadetes = new List<Cadete>();
         string[] lineas = File.ReadAllLines(rutaCadetes);
 
-        //aca salteo la primera linea (linea[0]) porque es el encabezado :P
+        //aca salto la primera linea (linea[0]) porque es el encabezado :P
         for (int i = 1; i < lineas.Length; i++)
         {
             var datos = lineas[i].Split(',');
@@ -25,7 +25,10 @@ public class ManejoArchivos
 
     public Cadeteria CargarCadeteria(string rutaCadeteria, List<Cadete> listaCadetes)
     {
-        Cadeteria cadeteria = null;
+        /*necesito inicializarla en null, porque si la inicializo dentro
+        del "for" (cuando la quiera crear con los parametros) esto no se va a reflejar afuera" 
+        */ 
+        Cadeteria cadeteria = null; 
         string[] lineas = File.ReadAllLines(rutaCadeteria);
         //salto de nuevo el encabezado
         for (int i = 1; i < lineas.Length; i++)
@@ -38,4 +41,4 @@ public class ManejoArchivos
         }
         return cadeteria; 
     }
-}
+}    
