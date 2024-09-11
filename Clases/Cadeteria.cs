@@ -24,6 +24,7 @@ public class Cadeteria
 
     public void asignarPedidoACadete(List<Cadete> cadetes, List<Pedido> pedidosPendientes)
     {
+        mostrarCadetes(cadetes);
         Console.WriteLine("\n \t --ASIGNAR PEDIDO A CADETE--");
         Console.WriteLine("Ingrese el id del pedido:");
         int idPedido = int.Parse(Console.ReadLine()); 
@@ -48,13 +49,54 @@ public class Cadeteria
         {
             if (cadetes[i].Id==idCadete)
             {
-                cadetes[i].asignarPedido(pedidoAsignar);
+                cadetes[i].asignarPedido(pedidoAsignar); 
                 break; 
             }
         }
-
         /*Ya se lo mandé al cadete, por lo tanto lo quito de pendientes
         pedidosPendientes.Remove(pedidoAsignar); */
+    }
+
+    public void CambiarEstadoPedido(List<Cadete> cadetes, List<Pedido> pedidos)
+    {
+        Console.WriteLine("\n \t --CAMBIAR ESTADO DEL PEDIDO--");
+        mostrarIdPedidos(pedidos); 
+        Console.WriteLine("Ingrese el id del pedido:");
+        int idPedido = int.Parse(Console.ReadLine()); 
+
+        /*Como no sé que cadete tiene el pedido que necesito, debo recorrer todas
+        las listas de todos los cadetes hasta encontrarlo :P, voy a buscar la manera
+        de optimizarlo después */
+        foreach (Cadete cadete in cadetes)
+        {       
+            for (int i = 0; i < cadete.ListadoDePedidos.Count; i++)
+            {
+                if (cadete.ListadoDePedidos[i].Nro==idPedido)
+                {
+                    cadete.ListadoDePedidos[i].CambiarEstado();
+                    break;
+                }
+            }
+        }
+    }
+
+    private void mostrarCadetes(List<Cadete> cadetes)
+    {
+        
+        Console.WriteLine("\n \t --ID DE LOS CADETES:-- ");
+        foreach (Cadete cadete in cadetes)
+        {
+            Console.WriteLine($"{cadete.Nombre} ID: {cadete.Id}");
+        }
+    }
+
+    public void mostrarIdPedidos(List<Pedido> pedidos)
+    {
+        Console.WriteLine("\n ID DE LOS PEDIDOS");
+        foreach (Pedido pedido in pedidos)
+        {
+            Console.WriteLine($"Pedido de: {pedido.Cliente.Nombre}, ID: ");
+        }
     }
 }
 

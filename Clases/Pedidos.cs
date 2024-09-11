@@ -14,6 +14,7 @@ public class Pedido
     public int Nro { get => nro; set => nro = value; }
     public string Obs { get => obs; set => obs = value; }
     public Estado Estado { get => estado; set => estado = value; }
+    public Cliente Cliente { get => cliente; set => cliente = value; }
 
     public Pedido()
     {
@@ -34,7 +35,12 @@ public class Pedido
     {
         this.nro = nro; 
         this.obs = obs; 
-        this.cliente = cliente; 
+        this.Cliente = cliente; 
         this.estado = estado; 
+    }
+
+    public void CambiarEstado()
+    {
+        estado = Estado.Entregado; 
     }
 }

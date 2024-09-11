@@ -10,43 +10,55 @@ var cliente = new Cliente();
 
 List<Cadete> listaCadetes = manejoArchivos.obtenerCadetes(rutaCadetes);
 var cadeteria = manejoArchivos.CargarCadeteria(rutaCadeteria, listaCadetes);
-
-cadeteria.presentacionCadeteria();
-menu.mostrarMenu();
-int opcion = menu.LeerYValidarOpcion(6);
-
-int nroPedido = 1000;
 List<Pedido> listaPedidosPendientes = new List<Pedido>();
 
-switch (opcion)
+cadeteria.presentacionCadeteria();
+int opcion;
+do
 {
-    case 1:
-        int cargarOtroPedido;
-        do
-        {
-            Cliente nuevoCliente = cliente.CrearCliente();
-            Pedido nuevoPedido = pedido.nuevoPedido(cliente, nroPedido);
-            listaPedidosPendientes.Add(nuevoPedido);
-            nroPedido++;
-            Console.WriteLine("Quiere cargar otro pedido? \n 1) Si \n 2) No");
-            cargarOtroPedido = menu.LeerYValidarOpcion(2); 
-        } while (cargarOtroPedido==1);
-    break;
-    case 2: 
-        cadeteria.asignarPedidoACadete(listaCadetes, listaPedidosPendientes);
-    break; 
-}
+    menu.mostrarMenu();
+    opcion = menu.LeerYValidarOpcion(6);
+    int opcionIterar;
+    switch (opcion)
+    {
+        case 1:
+            int nroPedido = 1000;
+            do
+            {
+                Cliente nuevoCliente = cliente.CrearCliente();
+                Pedido nuevoPedido = pedido.nuevoPedido(cliente, nroPedido);
+                listaPedidosPendientes.Add(nuevoPedido);
+                nroPedido++;
+                Console.WriteLine("¿Quiere cargar otro pedido? \n 1) Sí \n 2) No");
+                opcionIterar = menu.LeerYValidarOpcion(2);
+            } while (opcionIterar == 1);
+            break;
+        case 2:
+            do
+            {
+                cadeteria.asignarPedidoACadete(listaCadetes, listaPedidosPendientes);
+                Console.WriteLine("¿Quiere asignar otro pedido? \n 1) Sí \n 2) No");
+                opcionIterar = menu.LeerYValidarOpcion(2);
+            } while (opcionIterar == 1);
+            break;
 
+        case 3:
+            do
+            {
+                cadeteria.CambiarEstadoPedido(listaCadetes, listaPedidosPendientes);
+                Console.WriteLine("¿Quiere cambiar el estado de otro pedido? \n 1) Sí \n 2) No");
+                opcionIterar = menu.LeerYValidarOpcion(2);
+            } while (opcionIterar == 1);
+            break;
 
+        case 4:
+            do
+            {
+                // cadeteria.reasignarPedidos(listaCadetes);
+                Console.WriteLine("¿Quiere reasignar otro pedido? \n 1) Sí \n 2) No");
+                opcionIterar = menu.LeerYValidarOpcion(2);
+            } while (opcionIterar == 1);
+            break;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
+} while (opcion != 6);
