@@ -17,7 +17,7 @@ int opcion;
 do
 {
     menu.mostrarMenu();
-    opcion = menu.LeerYValidarOpcion(6);
+    opcion = menu.LeerYValidarOpcion(7);
     int opcionIterar;
     switch (opcion)
     {
@@ -37,6 +37,7 @@ do
             do
             {
                 cadeteria.asignarPedidoACadete(listaCadetes, listaPedidosPendientes);
+                mostrarListaCadetes();
                 Console.WriteLine("¿Quiere asignar otro pedido? \n 1) Sí \n 2) No");
                 opcionIterar = menu.LeerYValidarOpcion(2);
             } while (opcionIterar == 1);
@@ -50,15 +51,40 @@ do
                 opcionIterar = menu.LeerYValidarOpcion(2);
             } while (opcionIterar == 1);
             break;
-
         case 4:
             do
             {
-                // cadeteria.reasignarPedidos(listaCadetes);
+                cadeteria.reasignarPedidos(listaCadetes);
                 Console.WriteLine("¿Quiere reasignar otro pedido? \n 1) Sí \n 2) No");
                 opcionIterar = menu.LeerYValidarOpcion(2);
             } while (opcionIterar == 1);
             break;
+        case 5: 
+            cadeteria.MostrarInforme(listaCadetes); 
+            break;
+        case 6: 
+        mostrarListaCadetes();
+        break;
     }
+} while (opcion != 7);
 
-} while (opcion != 6);
+void mostrarListaCadetes()
+{
+    Console.WriteLine("\n \t\t --LISTADO DE CADETES--\n");
+    foreach (Cadete cadete in listaCadetes)
+    {
+        Console.WriteLine($" \t ID: {cadete.Id} | NOMBRE: {cadete.Nombre} | PEDIDOS: ");
+        if (cadete.ListadoDePedidos.Count > 0)
+        {
+            foreach (Pedido pedido in cadete.ListadoDePedidos)
+            {
+                Console.WriteLine($"\t\t \n Pedido ID: {pedido.Nro} | Estado: {pedido.Estado} | Cliente: {pedido.Cliente.Nombre} \n");
+            }
+        }
+        else
+        {
+            Console.WriteLine("\t\t No tiene pedidos asignados.\n");
+        }
+    }
+}
+

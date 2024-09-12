@@ -31,11 +31,11 @@ public class Cadete
         ListadoDePedidos.Add(pedido); 
     }
 
-    public decimal totalJornal()
+    public float totalJornal()
     {
         return ListadoDePedidos.Count*500; 
     }
-    public decimal cantidadEnvios()
+    public int cantidadEnvios()
     {
         return ListadoDePedidos.Count; 
     }

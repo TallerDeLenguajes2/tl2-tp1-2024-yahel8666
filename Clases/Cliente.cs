@@ -20,6 +20,8 @@ public class Cliente
     //aqui pido los datos correspondientes para despues pasarselos al constructor que devolverá el cliente ya cargado. 
     public Cliente CrearCliente()
     {
+        Console.WriteLine("\n \t\t --DAR DE ALTA UN PEDIDO--\n");
+        Console.WriteLine("\n \t\t NUEVO CLIENTE: \n");
         Console.WriteLine("Ingrese el nombre del cliente");
         string nombre = Console.ReadLine(); 
         Console.WriteLine("Ingrese el telefono del cliente");
@@ -28,7 +30,6 @@ public class Cliente
         string direccion = Console.ReadLine();
         Console.WriteLine("Ingrese algunos datos de referencia de direccion del cliente"); 
         string referencia = Console.ReadLine();
-
         return new Cliente(nombre, telefono, direccion, referencia);  
          
     }
