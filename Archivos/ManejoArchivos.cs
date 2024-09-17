@@ -2,12 +2,17 @@ namespace cadeteria;
 
 public class ManejoArchivos
 {
+    public bool Existe(string ruta)
+    {
+        return File.Exists(ruta);
+    }
+
     public List<Cadete> obtenerCadetes(string rutaCadetes)
     {
         List<Cadete> listaCadetes = new List<Cadete>();
         string[] lineas = File.ReadAllLines(rutaCadetes);
-
         //aca salto la primera linea (linea[0]) porque es el encabezado :P
+
         for (int i = 1; i < lineas.Length; i++)
         {
             var datos = lineas[i].Split(',');

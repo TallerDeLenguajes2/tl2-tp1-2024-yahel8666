@@ -21,7 +21,7 @@ public class Cliente
     public Cliente CrearCliente()
     {
         Console.WriteLine("\n \t\t --DAR DE ALTA UN PEDIDO--\n");
-        Console.WriteLine("\n \t\t NUEVO CLIENTE: \n");
+        Console.WriteLine("\t\t NUEVO CLIENTE");
         Console.WriteLine("Ingrese el nombre del cliente");
         string nombre = Console.ReadLine(); 
         Console.WriteLine("Ingrese el telefono del cliente");

@@ -23,9 +23,18 @@ public class Cadeteria
         Console.WriteLine($"\t BIENVENIDOS A '{nombre}' \n");
     }
 
-    public void asignarPedidoACadete(List<Cadete> cadetes, List<Pedido> pedidosPendientes)
+    public void asignarPedidoACadete( List<Pedido> pedidosPendientes)
     {
-        Console.WriteLine("\n \t --ASIGNAR PEDIDO A CADETE--");
+        Console.WriteLine("\n \t ASIGNAR PEDIDO A CADETE ");
+        if (pedidosPendientes == null || pedidosPendientes.Count == 0)
+        {
+            Console.WriteLine("\n \t No hay pedidos pendientes para asignar\n");
+            return;
+        } 
+       
+        mostrarListaPedidos(pedidosPendientes);
+        mostrarCadetes();
+    
         Console.WriteLine("Ingrese el id del pedido:");
         int idPedido = int.Parse(Console.ReadLine());
         Console.WriteLine("Ingrese el id del cadete: ");
@@ -51,11 +60,11 @@ public class Cadeteria
         } else
         {
             Cadete cadeteNuevo=null; 
-            for (int i = 0; i < cadetes.Count; i++)
+            for (int i = 0; i < listaDeCadetes.Count; i++)
             {
-                if (cadetes[i].Id == idCadete)
+                if (listaDeCadetes[i].Id == idCadete)
                 {
-                    cadeteNuevo = cadetes[i];
+                    cadeteNuevo = listaDeCadetes[i];
                     break;
                 }
             } 
@@ -65,15 +74,21 @@ public class Cadeteria
             } else
             {
                 cadeteNuevo.asignarPedido(pedidoAsignar);
-                // Ya se lo mandé al cadete, por lo tanto lo quito de pendientes
+                Console.WriteLine($"Pedido asignado con exito al cadete: {cadeteNuevo.Nombre}");
                 pedidosPendientes.Remove(pedidoAsignar); 
             }
         }
     }
 
-    public void CambiarEstadoPedido(List<Cadete> cadetes, List<Pedido> pedidos)
+    public void CambiarEstadoPedido( List<Pedido> pedidos)
     {
-        Console.WriteLine("\n \t\t --CAMBIAR ESTADO DEL PEDIDO--\n");
+        if (pedidos == null || pedidos.Count == 0)
+        {
+            Console.WriteLine("\n \t No hay pedidos pendientes para asignar\n");
+            return;
+        } 
+        Console.WriteLine("\n \t\t CAMBIAR ESTADO DEL PEDIDO: \n");
+        mostrarListaPedidos(pedidos);
         Console.WriteLine("Ingrese el id del pedido:");
         int idPedido = int.Parse(Console.ReadLine());
 
@@ -81,33 +96,31 @@ public class Cadeteria
         las listas de todos los cadetes hasta encontrarlo :P, voy a buscar la manera
         de optimizarlo después */
 
-        foreach (Cadete cadete in cadetes)
+        foreach (Cadete cadete in listaDeCadetes)
         {
             for (int i = 0; i < cadete.ListadoDePedidos.Count; i++)
             {
                 if (cadete.ListadoDePedidos[i].Nro == idPedido)
                 {
                     cadete.ListadoDePedidos[i].CambiarEstado();
-
+                    Console.WriteLine("Estado cambiado con exito ;) ");
                     break;
                 }
             }
         }
     }
-    public void reasignarPedidos(List<Cadete> cadetes)
+    public void reasignarPedidos()
     {
         Console.WriteLine("\n \t\t --REASIGNAR PEDIDOS--\n");
         Console.WriteLine("Ingrese el ID del pedido:");
         int idPedido = int.Parse(Console.ReadLine());
-
         Console.WriteLine("Ingrese el ID del cadete al que se le asignará el pedido:");
         int idCadeteNuevo = int.Parse(Console.ReadLine());
 
         Pedido pedidoParaReasignar = null;
-
-        /*Primero verifico que el cadete al que le quiero asignar el pedido exista */
+        /*Primero verifico que el cadete al le quiero asignar el pedido exista */
         Cadete cadeteNuevo = null;
-        foreach (Cadete cadete in cadetes)
+        foreach (Cadete cadete in listaDeCadetes)
         {
             if (cadete.Id == idCadeteNuevo)
             {
@@ -118,11 +131,12 @@ public class Cadeteria
         if (cadeteNuevo == null)
         {
             Console.WriteLine("El cadete con ID {0} no fue encontrado.", idCadeteNuevo);
+            return; 
         }
         else
         {
             //Si existe, buscamos el pedido
-            foreach (Cadete cadete in cadetes)
+            foreach (Cadete cadete in listaDeCadetes)
             {
                 for (int i = 0; i < cadete.ListadoDePedidos.Count; i++)
                 {
@@ -143,22 +157,22 @@ public class Cadeteria
         }
     }
 
-    public void MostrarInforme(List <Cadete> cadetes)
+    public void MostrarInforme()
     {
-        Console.WriteLine("\n \t\t --INFORME TOTAL--\n");
+        Console.WriteLine("\n \t\t INFORME TOTAL \n");
 
         Console.WriteLine("\t --CANTIDAD ENVIOS Y MONTO DE CADA CADETE --\n");
-        foreach (Cadete cadete in cadetes)
+        foreach (Cadete cadete in listaDeCadetes)
         {    
             Console.WriteLine($" \t Cadete id: {cadete.Id} | Cantidad envios: {cadete.cantidadEnvios()}");
             Console.WriteLine($" \t Cadete id: {cadete.Id} | Jornal: {cadete.totalJornal()} \n");
         }
 
         Console.WriteLine("\t --PROMEDIO DE ENVIOS --");
-        Console.WriteLine($"\t {calcularPromedio(cadetes)}");
+        Console.WriteLine($"\t {calcularPromedio(listaDeCadetes)}");
 
         Console.WriteLine("\t --MONTO TOTAL RECAUDADO --");
-        Console.WriteLine($"\t {calcularMontoTotal(cadetes)}");
+        Console.WriteLine($"\t {calcularMontoTotal(listaDeCadetes)}");
     }
 
     private int calcularPromedio(List<Cadete> cadetes)
@@ -178,6 +192,24 @@ public class Cadeteria
             promedio += cadetes[i].totalJornal();
         }
         return promedio / cadetes.Count;        
+    }
+
+    private void mostrarListaPedidos(List<Pedido> pedidosPendientes)
+    {
+        Console.WriteLine("\t --Lista de pedidos-- \n");
+        for (int i = 0; i < pedidosPendientes.Count; i++)
+        {
+            Console.WriteLine($"Pedido numero: {i}, id: {pedidosPendientes[i].Nro}");
+        }
+        Console.WriteLine("\n");
+    }
+    private void mostrarCadetes()
+    {
+        Console.WriteLine("\t --Lista de Cadetes-- \n");
+        for (int i = 0; i < listaDeCadetes.Count; i++)
+        {
+            Console.WriteLine($"Cadete {listaDeCadetes[i].Nombre}, id: {listaDeCadetes[i].Id} \n");
+        }
     }
 }
 

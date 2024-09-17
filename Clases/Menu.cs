@@ -10,8 +10,7 @@ public class Menu
         Console.WriteLine("3) Cambiar estado del pedido");
         Console.WriteLine("4) Reasignar pedido a otro cadete");
         Console.WriteLine("5) Mostrar resumen del día");
-        Console.WriteLine("6) Mostrar listado de cadetes");
-        Console.WriteLine("7) Salir ");
+        Console.WriteLine("6) Salir ");
 
     }
 
