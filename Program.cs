@@ -1,18 +1,19 @@
 ﻿using cadeteria;
 
-string rutaCadetes = @"Archivos\datosCadetes.csv";
-string rutaCadeteria = @"Archivos\datosCadeteria.csv";
+string carpeta = @"Archivos\" ;
+string rutaCadetes = carpeta + "datosCadetes.csv";
+string rutaCadeteria = carpeta + "datosCadeteria.csv";
 
 var manejoArchivos = new ManejoArchivos();
 
 if (!manejoArchivos.Existe(rutaCadeteria) && !manejoArchivos.Existe(rutaCadetes))
 {
     Console.WriteLine("No se encontraron los datos"); 
+    return;
 } else
 {
     var menu = new Menu();
     var pedido = new Pedido();
-    var cliente = new Cliente();
 
     List<Cadete> listaCadetes = manejoArchivos.obtenerCadetes(rutaCadetes);
     var cadeteria = manejoArchivos.CargarCadeteria(rutaCadeteria, listaCadetes);
@@ -20,6 +21,7 @@ if (!manejoArchivos.Existe(rutaCadeteria) && !manejoArchivos.Existe(rutaCadetes)
 
     cadeteria.presentacionCadeteria();
     int opcion;
+    int nroPedido = 1;
     do
     {
         menu.mostrarMenu();
@@ -28,11 +30,9 @@ if (!manejoArchivos.Existe(rutaCadeteria) && !manejoArchivos.Existe(rutaCadetes)
         switch (opcion)
         {
             case 1:
-                int nroPedido = 1;
                 do
                 {
-                    Cliente nuevoCliente = cliente.CrearCliente();
-                    Pedido nuevoPedido = pedido.nuevoPedido(nuevoCliente, nroPedido);
+                    Pedido nuevoPedido = pedido.NuevoPedido(nroPedido);
                     listaPedidosPendientes.Add(nuevoPedido);
                     nroPedido++;
                     Console.WriteLine("¿Quiere cargar otro pedido? \n 1) Sí \n 2) No");

@@ -8,7 +8,6 @@ public class Cadete
     string telefono;
     string genero; 
     List<Pedido> listadoDePedidos;
-
     public string Nombre { get => nombre; set => nombre = value; }
     public int Id { get => id; set => id = value; }
     public int Edad { get => edad; set => edad = value; }

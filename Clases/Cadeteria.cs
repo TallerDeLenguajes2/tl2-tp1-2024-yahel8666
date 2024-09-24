@@ -4,7 +4,7 @@ public class Cadeteria
 {
     string nombre;
     string telefono;
-    public List<Cadete> listaDeCadetes;
+    private List<Cadete> listaDeCadetes;
 
     public Cadeteria(string nombre, string telefono, List<Cadete> listaDeCadetes)
     {
@@ -41,8 +41,7 @@ public class Cadeteria
         int idCadete = int.Parse(Console.ReadLine());
 
         /*Busco en la  lista de pedidos pendientes el pedido y lo guardo en una 
-        variable (ya se que no es aconsejable, dejenme), despues busco al cadete 
-        que quiero y le mando ese pedido que encontré*/
+        variable, despues busco al cadete  que quiero y le mando ese pedido que encontré*/
 
         Pedido pedidoAsignar = null;
         for (int j = 0; j < pedidosPendientes.Count; j++)

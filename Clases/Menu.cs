@@ -11,27 +11,24 @@ public class Menu
         Console.WriteLine("4) Reasignar pedido a otro cadete");
         Console.WriteLine("5) Mostrar resumen del día");
         Console.WriteLine("6) Salir ");
-
     }
 
-    public int LeerYValidarOpcion(int max )
+    public int LeerYValidarOpcion(int max)
     {
-        bool valida = false;
-        int numero; 
-        Console.WriteLine("Por favor, ingrese una opcion: ");
+        int numero;
+        Console.WriteLine($"Por favor, ingrese una opción entre 1 y {max}:");
+
         do
         {
             string input = Console.ReadLine();
             if (int.TryParse(input, out numero) && numero >= 1 && numero <= max)
             {
-                valida=true; 
+                return numero;
             }
             else
             {
-                valida=false;
-                Console.WriteLine($"Opción no válida. Por favor ingresa un número del 1 al {max}.");
+                Console.WriteLine($"Opción no válida. Por favor ingrese un número del 1 al {max}.");
             }
-        } while (!valida);
-        return numero;
+        } while (true); //sigue en el bucle hasta que se ingrese una opción válida
     }
 }

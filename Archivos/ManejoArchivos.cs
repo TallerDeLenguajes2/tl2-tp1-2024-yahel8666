@@ -10,12 +10,12 @@ public class ManejoArchivos
     public List<Cadete> obtenerCadetes(string rutaCadetes)
     {
         List<Cadete> listaCadetes = new List<Cadete>();
-        string[] lineas = File.ReadAllLines(rutaCadetes);
-        //aca salto la primera linea (linea[0]) porque es el encabezado :P
+        string[] lineas = File.ReadAllLines(rutaCadetes); //devuelve un array con TODAS las lineas 
 
-        for (int i = 1; i < lineas.Length; i++)
+        //salto la primera linea (linea[0]) porque es el encabezado :P
+        for (int i = 1; i < lineas.Length; i++) 
         {
-            var datos = lineas[i].Split(',');
+            var datos = lineas[i].Split(','); //separo cada linea del array en datos individuales.
             string nombre = datos[0];
             int id = int.Parse(datos[1]);
             int edad = int.Parse(datos[2]);
@@ -28,6 +28,41 @@ public class ManejoArchivos
         return listaCadetes;
     }
 
+    /* 
+    OTRO METODO, que me lee secuencialmente cada linea, ideal para archivos muy pesados. 
+    public List<Cadete> LeerCadetes(string rutaCadetes)
+    {
+        List<Cadete> listaCadetes = new List<Cadete>();
+        if (!Existe(rutaCadetes))
+        { 
+            return listaCadetes;     
+        }
+
+        using (var archivoOpen = new FileStream(rutaCadetes, FileMode.Open))
+        {
+            using (var strReader = new StreamReader(archivoOpen))
+            {
+                string linea;
+                while ((linea = strReader.ReadLine()) != null) //acá lee cada linea del archivo
+                {
+                    var datos = linea.Split(';');
+                    if (datos.Length >= 4) 
+                    {
+                        // var cadete = new Cadete( bla bla bla);
+                        // listaCadetes.Add(cadete);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Línea inválida en el archivo: {linea}");
+                    }
+                }
+            }
+        }
+        return listaCadetes;
+    }
+    */
+
+
     public Cadeteria CargarCadeteria(string rutaCadeteria, List<Cadete> listaCadetes)
     {
         /*necesito inicializarla en null, porque si la inicializo dentro
@@ -35,6 +70,7 @@ public class ManejoArchivos
         */ 
         Cadeteria cadeteria = null; 
         string[] lineas = File.ReadAllLines(rutaCadeteria);
+        
         //salto de nuevo el encabezado
         for (int i = 1; i < lineas.Length; i++)
         {
