@@ -2,8 +2,11 @@ namespace cadeteria;
 
 public class Menu
 {
-    public void mostrarMenu()
+    static public void mostrarMenu(string nombre)
     {
+        Console.Clear();
+        Console.WriteLine($"\t \t BIENVENIDOS A '{nombre}'");
+
         Console.WriteLine("\n \t --Menú de Gestión de Pedidos--");
         Console.WriteLine("1) Dar de alta pedidos");
         Console.WriteLine("2) Asignar pedidos a cadetes");
@@ -13,7 +16,7 @@ public class Menu
         Console.WriteLine("6) Salir ");
     }
 
-    public int LeerYValidarOpcion(int max)
+    public static int LeerYValidarOpcion(int max)
     {
         int numero;
         Console.WriteLine($"Por favor, ingrese una opción entre 1 y {max}:");

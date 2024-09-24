@@ -16,12 +16,6 @@ public class Cadeteria
     public string Nombre { get => nombre; set => nombre = value; }
     public string Telefono { get => telefono; set => telefono = value; }
 
-    //Es mas para ver si se cargaron bien los datos del archivo ;) 
-    public void presentacionCadeteria()
-    {
-        Console.Clear();
-        Console.WriteLine($"\t BIENVENIDOS A '{nombre}' \n");
-    }
 
     public void asignarPedidoACadete(List<Pedido> pedidosPendientes)
     {
