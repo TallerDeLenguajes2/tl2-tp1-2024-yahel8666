@@ -17,7 +17,6 @@ public class Menu
     {
         int numero;
         Console.WriteLine($"Por favor, ingrese una opción entre 1 y {max}:");
-
         do
         {
             string input = Console.ReadLine();

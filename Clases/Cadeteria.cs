@@ -23,26 +23,31 @@ public class Cadeteria
         Console.WriteLine($"\t BIENVENIDOS A '{nombre}' \n");
     }
 
-    public void asignarPedidoACadete( List<Pedido> pedidosPendientes)
+    public void asignarPedidoACadete(List<Pedido> pedidosPendientes)
     {
         Console.WriteLine("\n \t ASIGNAR PEDIDO A CADETE ");
         if (pedidosPendientes == null || pedidosPendientes.Count == 0)
         {
             Console.WriteLine("\n \t No hay pedidos pendientes para asignar\n");
             return;
-        } 
-       
+        }
         mostrarListaPedidos(pedidosPendientes);
         mostrarCadetes();
-    
+        int idPedido;
         Console.WriteLine("Ingrese el id del pedido:");
-        int idPedido = int.Parse(Console.ReadLine());
-        Console.WriteLine("Ingrese el id del cadete: ");
-        int idCadete = int.Parse(Console.ReadLine());
+        while (!int.TryParse(Console.ReadLine(), out idPedido))
+        {
+            Console.WriteLine("Entrada inválida. Por favor, ingrese un número entero válido para el id del pedido:");
+        }
+        int idCadete;
+        Console.WriteLine("Ingrese el id del cadete:");
+        while (!int.TryParse(Console.ReadLine(), out idCadete))
+        {
+            Console.WriteLine("Entrada inválida. Por favor, ingrese un número entero válido para el id del cadete:");
+        }
 
         /*Busco en la  lista de pedidos pendientes el pedido y lo guardo en una 
         variable, despues busco al cadete  que quiero y le mando ese pedido que encontré*/
-
         Pedido pedidoAsignar = null;
         for (int j = 0; j < pedidosPendientes.Count; j++)
         {
@@ -51,14 +56,15 @@ public class Cadeteria
                 pedidoAsignar = pedidosPendientes[j];
                 break;
             }
-        } 
-        if (pedidoAsignar==null)
+        }
+        if (pedidoAsignar == null)
         {
             Console.WriteLine("Pedido no encontrado");
-            return; 
-        } else
+            return;
+        }
+        else
         {
-            Cadete cadeteNuevo=null; 
+            Cadete cadeteNuevo = null;
             for (int i = 0; i < listaDeCadetes.Count; i++)
             {
                 if (listaDeCadetes[i].Id == idCadete)
@@ -66,26 +72,27 @@ public class Cadeteria
                     cadeteNuevo = listaDeCadetes[i];
                     break;
                 }
-            } 
-            if (cadeteNuevo==null)
+            }
+            if (cadeteNuevo == null)
             {
-                Console.WriteLine("No se pudo encontrar al cadete con ese id"); 
-            } else
+                Console.WriteLine("No se pudo encontrar al cadete con ese id");
+            }
+            else
             {
                 cadeteNuevo.asignarPedido(pedidoAsignar);
                 Console.WriteLine($"Pedido asignado con exito al cadete: {cadeteNuevo.Nombre}");
-                pedidosPendientes.Remove(pedidoAsignar); 
+                pedidosPendientes.Remove(pedidoAsignar);
             }
         }
     }
 
-    public void CambiarEstadoPedido( List<Pedido> pedidos)
+    public void CambiarEstadoPedido(List<Pedido> pedidos)
     {
         if (pedidos == null || pedidos.Count == 0)
         {
             Console.WriteLine("\n \t No hay pedidos pendientes para asignar\n");
             return;
-        } 
+        }
         Console.WriteLine("\n \t\t CAMBIAR ESTADO DEL PEDIDO: \n");
         mostrarListaPedidos(pedidos);
         Console.WriteLine("Ingrese el id del pedido:");
@@ -130,7 +137,7 @@ public class Cadeteria
         if (cadeteNuevo == null)
         {
             Console.WriteLine("El cadete con ID {0} no fue encontrado.", idCadeteNuevo);
-            return; 
+            return;
         }
         else
         {
@@ -162,7 +169,7 @@ public class Cadeteria
 
         Console.WriteLine("\t --CANTIDAD ENVIOS Y MONTO DE CADA CADETE --\n");
         foreach (Cadete cadete in listaDeCadetes)
-        {    
+        {
             Console.WriteLine($" \t Cadete id: {cadete.Id} | Cantidad envios: {cadete.cantidadEnvios()}");
             Console.WriteLine($" \t Cadete id: {cadete.Id} | Jornal: {cadete.totalJornal()} \n");
         }
@@ -176,7 +183,7 @@ public class Cadeteria
 
     private int calcularPromedio(List<Cadete> cadetes)
     {
-        int promedio=0;  
+        int promedio = 0;
         for (int i = 0; i < cadetes.Count; i++)
         {
             promedio += cadetes[i].cantidadEnvios();
@@ -185,29 +192,29 @@ public class Cadeteria
     }
     private float calcularMontoTotal(List<Cadete> cadetes)
     {
-        float promedio=0;  
+        float promedio = 0;
         for (int i = 0; i < cadetes.Count; i++)
         {
             promedio += cadetes[i].totalJornal();
         }
-        return promedio / cadetes.Count;        
+        return promedio / cadetes.Count;
     }
 
     private void mostrarListaPedidos(List<Pedido> pedidosPendientes)
     {
-        Console.WriteLine("\t --Lista de pedidos-- \n");
+        Console.WriteLine("\n--Lista de pedidos-- \n");
         for (int i = 0; i < pedidosPendientes.Count; i++)
         {
-            Console.WriteLine($"Pedido numero: {i}, id: {pedidosPendientes[i].Nro}");
+            Console.WriteLine($"Pedido con id: {pedidosPendientes[i].Nro}");
         }
         Console.WriteLine("\n");
     }
     private void mostrarCadetes()
     {
-        Console.WriteLine("\t --Lista de Cadetes-- \n");
+        Console.WriteLine("--Lista de Cadetes-- \n");
         for (int i = 0; i < listaDeCadetes.Count; i++)
         {
-            Console.WriteLine($"Cadete {listaDeCadetes[i].Nombre}, id: {listaDeCadetes[i].Id} \n");
+            Console.WriteLine($"Cadete {listaDeCadetes[i].Nombre}, id: {listaDeCadetes[i].Id}");
         }
     }
 }
