@@ -50,7 +50,7 @@ if (!manejoArchivos.Existe(rutaCadeteria) && !manejoArchivos.Existe(rutaCadetes)
             case 3:
                 do
                 {
-                    cadeteria.CambiarEstadoPedido( listaPedidosPendientes);
+                    cadeteria.CambiarEstadoPedido(listaPedidosPendientes);
                     Console.WriteLine("¿Quiere cambiar el estado de otro pedido? \n 1) Sí \n 2) No");
                     opcionIterar = menu.LeerYValidarOpcion(2);
                 } while (opcionIterar == 1);
