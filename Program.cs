@@ -67,5 +67,7 @@ if (!manejoArchivos.Existe(rutaCadeteria) && !manejoArchivos.Existe(rutaCadetes)
                 cadeteria.MostrarInforme(); 
             break;
         }
+        // if (opcion!=6) Console.WriteLine("Presione una tecla para volver al menu"); Console.ReadKey(); 
     } while (opcion != 6);
 }
+
