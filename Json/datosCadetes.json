@@ -1,0 +1,30 @@
+[
+    {
+        "Nombre": "Juan Perez",
+        "Id": 1,
+        "Edad": 21,
+        "Telefono": "381000000",
+        "Genero": "Masculino"
+    },
+    {
+        "Nombre": "Ana Rodriguez",
+        "Id": 2,
+        "Edad": 22,
+        "Telefono": "381000001",
+        "Genero": "Femenino"
+    },
+    {
+        "Nombre": "Carlos Gutierrez",
+        "Id": 3,
+        "Edad": 23,
+        "Telefono": "381000002",
+        "Genero": "Masculino"
+    },
+    {
+        "Nombre": "Lucia Martinez",
+        "Id": 4,
+        "Edad": 20,
+        "Telefono": "381000003",
+        "Genero": "Femenino"
+    }
+]

@@ -34,3 +34,14 @@ public class Menu
         } while (true); //sigue en el bucle hasta que se ingrese una opción válida
     }
 }
+
+public class MenuArchivos
+{
+    public static void MostrarOpcionesAcceso()
+    {
+        Console.WriteLine("\n \t --Acceso a datos--");
+        Console.WriteLine("Elija de que manera quiere cargar los datos: ");
+        Console.WriteLine("1) Desde un archivo CSV");
+        Console.WriteLine("2) Desde un archivo JSON");
+    }
+}
